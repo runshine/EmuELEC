@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# SPDX-License-Identifier: GPL-3.0-or-later
+# Copyright (C) 2017-2018 Team LibreELEC (https://libreelec.tv)
+# Copyright (C) 2018-present Team CoreELEC (https://coreelec.org)
+
+echo "Phicomm-T1: Running mkimage ..."
+mcopy $RELEASE_DIR/3rdparty/bootloader/aml_autoscript ::
+mcopy $RELEASE_DIR/3rdparty/bootloader/uEnv.ini ::
+mcopy $RELEASE_DIR/3rdparty/bootloader/dtb.img ::
+mcopy $RELEASE_DIR/3rdparty/bootloader/uInitrd ::

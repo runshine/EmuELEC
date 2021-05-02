@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#PROJECT=Amlogic DEVICE=Phicomm-T1 ARCH=arm DISTRO=EmuELEC CONCURRENCY_MAKE_LEVEL=1 ./scripts/clean libevdev
+#PROJECT=Amlogic DEVICE=Phicomm-T1 ARCH=arm DISTRO=EmuELEC CONCURRENCY_MAKE_LEVEL=1 ./scripts/install libevdev
+#PROJECT=Amlogic DEVICE=Phicomm-T1 ARCH=arm DISTRO=EmuELEC CONCURRENCY_MAKE_LEVEL=1 ./scripts/install SDL2
+
+#gptokeyb has bug, must clean before rebuild
+#PROJECT=Amlogic DEVICE=Phicomm-T1 ARCH=arm DISTRO=EmuELEC CONCURRENCY_MAKE_LEVEL=1 ./scripts/clean  gptokeyb
+
+PROJECT=Amlogic DEVICE=Phicomm-T1 ARCH=arm DISTRO=EmuELEC CONCURRENCY_MAKE_LEVEL=16 make image

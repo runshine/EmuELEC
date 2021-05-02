@@ -1,0 +1,16 @@
+################################################################################
+# Build options for Phicomm-T1, override Amlogic options
+################################################################################
+
+  # Kernel target
+    KERNEL_TARGET="Image"
+
+  # Build Android kernel image using mkbootimg
+    BUILD_ANDROID_BOOTIMG="no"
+                        
+    ADDITIONAL_PACKAGES="$ADDITIONAL_PACKAGES t1-boot"
+    
+    IR_REMOTE_KEYMAPS="$IR_REMOTE_KEYMAPS mecool"
+    
+    SUBDEVICES=""
+

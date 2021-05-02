@@ -1,0 +1,15 @@
+setenv bootfromnand 0
+
+if test ${bootfromnand} = 1; then setenv bootfromnand 0; saveenv; run storeboot; fi;
+setenv t1_env_addr "0x10400000"
+setenv t1_kernel_addr "0x11000000"
+setenv t1_initrd_addr "0x13000000"
+setenv t1_boot_start 'booti ${t1_kernel_addr} ${t1_initrd_addr} ${t1_dtb_mem_addr};'
+setenv boot_t1_mmc 'if ext4load mmc 1:b ${t1_kernel_addr} /kernel.img; then if ext4load mmc 1:b ${t1_initrd_addr} /uInitrd; then if ext4load mmc 1:b ${t1_env_addr} /uEnv.ini; then env import -t ${t1_env_addr} ${filesize};fi; if ext4load mmc 1:b ${dtb_mem_addr} /dtb.img; then run t1_boot_start; else store dtb read ${dtb_mem_addr}; run t1_boot_start;fi;fi;fi;'
+setenv boot_t1_usb 'if fatload usb 0 ${t1_kernel_addr} kernel.img; then if fatload usb 0 ${t1_initrd_addr} uInitrd; then if fatload usb 0 ${t1_env_addr} uEnv.ini; then env import -t ${t1_env_addr} ${filesize}; fi; if fatload usb 0 ${dtb_mem_addr} ${dtb_name}; then run t1_boot_start; else store dtb read ${dtb_mem_addr}; run t1_boot_start; fi; fi; fi;'
+#setenv boot_t1 'run boot_t1_mmc; run boot_t1_usb'
+setenv bootfromusb 'if test ${bootfromnand} = 1; then setenv bootfromnand 0; saveenv; run storeboot; fi; usb start 0;run boot_t1_usb;run boot_t1_mmc;'
+saveenv
+if test ${bootcmd} = "run storeboot"; then setenv bootcmd "run bootfromusb;run storeboot"; saveenv; run bootcmd; fi;
+run boot_t1_usb
+

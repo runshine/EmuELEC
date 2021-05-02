@@ -15,6 +15,7 @@ PKG_TOOLCHAIN="manual"
 makeinstall_target() {
   mkdir -p $INSTALL/system
     cp -a system/* $INSTALL/system
+    cp $INSTALL/system/lib/hw/gralloc.amlogic.so $INSTALL/system/lib/hw/gralloc.default.so 
 }
 
 post_install() {
