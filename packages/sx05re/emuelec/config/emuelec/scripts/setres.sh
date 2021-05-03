@@ -13,10 +13,10 @@ fi
 
 case "$1" in
 "16")
-	BPP=16
+	BPP=32
 if [ -e /proc/device-tree/t82x@d00c0000/compatible ]; then
 	cp /system/build.prop /storage/build.prop
-	sed -i 's/32/16/g' /storage/build.prop
+	#sed -i 's/32/16/g' /storage/build.prop
 	mount -o bind /storage/build.prop /system/build.prop
 fi 
 	;;
@@ -29,6 +29,8 @@ if [ ! -e /proc/device-tree/t82x@d00c0000/compatible ]; then
 # always set 32 BPP for S905/N2
  BPP=32
 fi
+
+echo "`date`: $0 $1 $2 mode=$MODE" >> /tmp/test.log
 
 if [ -e /ee_s905 ]; then
 case "$MODE" in
